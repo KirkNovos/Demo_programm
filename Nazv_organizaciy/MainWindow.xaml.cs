@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nazv_organizaciy.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,13 +22,20 @@ namespace Nazv_organizaciy
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
-            this.DataContext = this;
+        {         
             InitializeComponent();
+            this.DataContext = this;
+            ServiceList = Core.DB.Service.ToList();
         }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+        private List<Service> _ServiceList;
+        public List<Service> ServiceList
+        {
+            get { return _ServiceList; }
+            set { _ServiceList = value; }
         }
     }
 }
