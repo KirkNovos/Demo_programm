@@ -39,6 +39,16 @@ namespace Nazv_organizaciy
             }
         }
 
+        public string DiscountString
+        {
+           get
+          {
+                string s2 = (Discount * 100).ToString();
+                string s1 = "%";
+                return s2 + s1;
+         }
+        }
+        
         public string CostWithDiscount
         {
             get
@@ -51,7 +61,7 @@ namespace Nazv_organizaciy
         {
             get
             {
-                return Discount > 0;
+                return Discount == 0;
             }
         }
 

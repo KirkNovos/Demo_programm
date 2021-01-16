@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:Nazv_organizaciy"
         mc:Ignorable="d"
         FontFamily="Arial Black"
-        Title="Услуги авто сервиса" 
+        x:Name="Root"
+        Title="Услуги авто сервиса"
         MinHeight="300" MinWidth="300" 
-        Height="450" Width="800">
+        Height="450" Width="1100">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -24,8 +25,25 @@
                 Content="Выход"
                 Click="ExitButton_Click"
                 Style="{StaticResource BrownButtonStyle}"/>
+            
+            
+            
         </StackPanel>
-        <Image 
+
+        <StackPanel 
+            Orientation="Vertical"
+            Margin="5"
+            Height="33"
+            VerticalAlignment="Bottom">
+            <Button
+                Style="{StaticResource GrayButtonStyle}"
+                Content="{Binding AdminModeCaption}"
+                Name="AdminButton"
+                Click="AdminButton_Click" Height="16"/>
+        </StackPanel>
+
+
+            <Image 
                 Margin="5"
                 Source="./image/service_logo.png" 
                 VerticalAlignment="Top"/>
@@ -40,7 +58,7 @@
                     <Style.Triggers>
                         <DataTrigger 
                             Binding="{Binding HasDiscount}" 
-                            Value="True">
+                            Value="False">
                             <Setter 
                                 Property="Background" 
                                 Value="LightGreen"/>
@@ -54,10 +72,6 @@
                     Width="250"
                     Header="Наименование услуги"
                     Binding="{Binding Title}"/>
-                <!--<DataGridTextColumn 
-                    Width="100"
-                    Header="Стоимость"
-                    Binding="{Binding Cost}"/>-->
                 <DataGridTemplateColumn 
                     Width="100"
                     Header="Стоимость">
@@ -70,7 +84,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
+
+
+                <DataGridTextColumn 
+                    Width="150"
+                    Header="Стоимость со скидкой"
+                    Binding="{Binding CostWithDiscount}"/>
                 <DataGridTextColumn 
                     Width="150"
                     Header="Продолжительность"
@@ -91,7 +111,26 @@
                 <DataGridTextColumn 
                     Width="60"
                     Header="Скидка"
-                    Binding="{Binding Discount}"/>
+                    Binding="{Binding DiscountString}"/>
+
+                <DataGridTemplateColumn
+                     Header="Действия">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel 
+                                Visibility="{Binding DataContext.AdminVisibility, ElementName=Root}"
+                                Orientation="Horizontal">
+                                <Button 
+                                    Content="Редактировать" 
+                                    Name="EditButton" />
+                                <Button 
+                                    Content="Удалить" 
+                                    Name="DeleteButton"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
             
